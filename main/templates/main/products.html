@@ -1,0 +1,95 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Shop Collection - ClothAura{% endblock %}
+
+{% block content %}
+<div class="bg-white min-h-screen">
+
+    <!-- Hero Banner -->
+    <div class="relative h-[300px] flex items-center justify-center bg-primary overflow-hidden mb-20">
+        <div class="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop"
+                class="w-full h-full object-cover opacity-40">
+        </div>
+        <div class="relative z-10 text-center">
+            <span class="uppercase tracking-[0.3em] text-secondary font-bold text-xs mb-4 block">Our Collection</span>
+            <h1 class="text-5xl md:text-6xl font-black text-white tracking-tighter uppercase">Shop All</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-6 pb-32">
+        {% if products %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-16 gap-x-8">
+
+            {% for p in products %}
+            <div class="group">
+                <a href="{% url 'product_detail' p.id %}"
+                    class="block relative aspect-[3/4] rounded-2xl overflow-hidden bg-slate-50 mb-6 border border-gray-50">
+                    {% if p.main_image %}
+                    <img src="{{ p.main_image }}" alt="{{ p.name }}"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    {% else %}
+                    <div class="w-full h-full flex items-center justify-center text-gray-300">
+                        <i class="bi bi-image text-4xl"></i>
+                    </div>
+                    {% endif %}
+
+                    <!-- Badges -->
+                    <div class="absolute top-4 left-4 flex flex-col gap-2">
+                        {% if p.discount > 0 %}
+                        <span
+                            class="bg-red-500 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-lg uppercase tracking-widest">
+                            {{ p.discount }}% Off
+                        </span>
+                        {% endif %}
+                        {% if p.created_at|date:"Ymd" > "20240101" %} {# Just an example logic #}
+                        <span
+                            class="bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-lg uppercase tracking-widest">
+                            New
+                        </span>
+                        {% endif %}
+                    </div>
+
+                    <!-- Quick Add Overlay -->
+                    <div
+                        class="absolute inset-0 bg-primary/0 group-hover:bg-primary/20 transition-all duration-300 flex items-end justify-center p-6 opacity-0 group-hover:opacity-100">
+                        <button
+                            class="w-full bg-white text-primary py-4 rounded-full font-bold uppercase tracking-widest text-[10px] shadow-2xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                            Quick View
+                        </button>
+                    </div>
+                </a>
+
+                <div class="space-y-1">
+                    <div class="flex justify-between items-start">
+                        <h3 class="font-bold text-primary uppercase text-sm tracking-tight line-clamp-1 flex-1">{{
+                            p.name }}</h3>
+                    </div>
+                    <p class="text-gray-400 text-xs font-light mb-4 line-clamp-1">{{ p.category|default:"Collections" }}
+                    </p>
+
+                    <div class="flex items-center gap-3">
+                        <span class="text-lg font-bold text-primary">₹{{ p.final_price }}</span>
+                        {% if p.discount > 0 %}
+                        <span class="text-sm text-gray-300 line-through">₹{{ p.price }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        {% else %}
+        <div class="text-center py-20 bg-slate-50 rounded-3xl">
+            <i class="bi bi-box-seam text-6xl text-gray-200 mb-6 block"></i>
+            <h3 class="text-2xl font-bold text-primary uppercase mb-2">No Products Found</h3>
+            <p class="text-gray-400 font-light mb-8">We couldn't find any products in our collection right now.</p>
+            <a href="{% url 'home' %}"
+                class="inline-block bg-primary text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest text-xs btn-premium">Back
+                to Home</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

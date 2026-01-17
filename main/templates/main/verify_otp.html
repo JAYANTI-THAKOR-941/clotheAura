@@ -1,0 +1,36 @@
+{% extends 'main/base.html' %}
+
+{% block title %}OTP Verification - ClothAura{% endblock %}
+
+{% block content %}
+
+<section class="min-h-[80vh] flex items-center justify-center bg-gray-100 px-4">
+
+    <!-- OTP Card -->
+    <div class="bg-white rounded-xl shadow-lg w-full max-w-md p-8 text-center">
+        <!-- Optional Header Content -->
+        <div class="mb-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-2">Verify Your OTP</h2>
+            <p class="text-gray-600">Enter the OTP sent to your email to complete registration</p>
+        </div>
+
+        <form method="POST" class="space-y-4">
+            {% csrf_token %}
+
+            <input type="text" name="otp" placeholder="Enter OTP" required
+                   class="w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 text-center text-lg tracking-widest">
+
+            <button type="submit"
+                    class="w-full bg-yellow-400 text-gray-900 font-semibold py-3 rounded-md hover:bg-yellow-300 transition duration-300">
+                Verify OTP
+            </button>
+        </form>
+
+        <p class="mt-4 text-gray-600 text-sm">
+            Didn't receive the OTP? <a href="#" class="text-yellow-400 hover:text-yellow-300 font-semibold">Resend</a>
+        </p>
+    </div>
+
+</section>
+
+{% endblock %}

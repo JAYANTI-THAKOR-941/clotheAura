@@ -1,0 +1,61 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Create Account - ClothAura{% endblock %}
+
+{% block content %}
+
+<section class="min-h-screen flex items-center justify-center bg-slate-50 px-6 py-20">
+
+    <div class="w-full max-w-md animate-fade-in">
+        <!-- Brand identity -->
+        <div class="text-center mb-10">
+            <h1 class="text-4xl font-black text-primary tracking-tighter uppercase mb-2">Join Us</h1>
+            <p class="text-gray-400 text-sm font-light uppercase tracking-widest">Start your style journey today</p>
+        </div>
+
+        <!-- Register Card -->
+        <div class="bg-white rounded-[2.5rem] p-10 shadow-2xl shadow-slate-200/50 border border-gray-100">
+
+            <form method="POST" class="space-y-6">
+                {% csrf_token %}
+
+                <div class="space-y-2">
+                    <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-400 px-2">Full
+                        Name</label>
+                    <input type="text" name="name" placeholder="John Doe" required
+                        class="w-full px-6 py-4 bg-slate-50 border border-transparent rounded-2xl focus:bg-white focus:border-accent focus:ring-0 focus:outline-none text-sm transition-all duration-300">
+                </div>
+
+                <div class="space-y-2">
+                    <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-400 px-2">Email
+                        Address</label>
+                    <input type="email" name="email" placeholder="name@example.com" required
+                        class="w-full px-6 py-4 bg-slate-50 border border-transparent rounded-2xl focus:bg-white focus:border-accent focus:ring-0 focus:outline-none text-sm transition-all duration-300">
+                </div>
+
+                <div class="space-y-2">
+                    <label
+                        class="block text-[10px] font-bold uppercase tracking-widest text-gray-400 px-2">Password</label>
+                    <input type="password" name="password" placeholder="••••••••" required
+                        class="w-full px-6 py-4 bg-slate-50 border border-transparent rounded-2xl focus:bg-white focus:border-accent focus:ring-0 focus:outline-none text-sm transition-all duration-300">
+                </div>
+
+                <button type="submit"
+                    class="w-full bg-primary text-white font-bold py-5 rounded-2xl hover:bg-gray-800 transition-all duration-300 uppercase tracking-widest text-xs btn-premium mt-4">
+                    Create Account
+                </button>
+            </form>
+
+            <div class="mt-10 pt-10 border-t border-gray-50 text-center">
+                <p class="text-xs text-gray-400 uppercase tracking-widest">
+                    Already a member?
+                    <a href="{% url 'login' %}" class="text-accent hover:text-primary font-bold transition-colors">Sign
+                        In</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

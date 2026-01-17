@@ -1,0 +1,237 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}ClothAura - Elevate Your Everyday Style{% endblock %}
+
+{% block content %}
+
+<!-- ================= PREMIUM HERO SECTION ================= -->
+<section class="relative h-screen bg-primary overflow-hidden">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0">
+        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=2040&auto=format&fit=crop"
+            class="w-full h-full object-cover opacity-60">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary via-primary/60 to-transparent"></div>
+    </div>
+
+    <div class="relative z-10 h-full max-w-7xl mx-auto px-6 flex flex-col justify-center">
+        <div class="max-w-2xl space-y-8 animate-fade-in-up">
+            <span class="uppercase tracking-[0.3em] text-secondary font-bold text-xs">New Collection 2025</span>
+            <h1 class="text-6xl md:text-8xl font-black text-white leading-[0.9] tracking-tighter uppercase">
+                Redefine Your <br> <span class="text-secondary italic">Aura.</span>
+            </h1>
+            <p class="text-gray-300 text-lg md:text-xl font-light leading-relaxed max-w-lg">
+                Experience the perfect blend of contemporary aesthetics and timeless comfort. Our latest drop is here to
+                transform your wardrobe.
+            </p>
+            <div class="flex flex-wrap gap-4 items-center">
+                <a href="{% url 'products' %}"
+                    class="bg-secondary text-primary px-10 py-4 text-sm font-bold rounded-full inline-block btn-premium uppercase tracking-widest">
+                    Explore Shop
+                </a>
+                <a href="{% url 'about' %}"
+                    class="text-white border border-white/30 px-10 py-4 text-sm font-bold rounded-full inline-block hover:bg-white hover:text-primary transition-all duration-300 uppercase tracking-widest">
+                    Our Story
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Footer Info -->
+    <div class="absolute bottom-10 left-0 w-full z-10 hidden md:block">
+        <div
+            class="max-w-7xl mx-auto px-6 flex justify-between items-center text-white/50 text-[10px] font-bold uppercase tracking-[0.2em]">
+            <div class="flex gap-12">
+                <span>Free Worldwide Shipping</span>
+                <span>Exclusive Returns</span>
+            </div>
+            <div class="flex gap-6">
+                <a href="#" class="hover:text-secondary transition-colors">Instagram</a>
+                <a href="#" class="hover:text-secondary transition-colors">Twitter</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= CATEGORY SPOTLIGHT ================= -->
+<section class="py-32 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+            <div class="max-w-xl">
+                <span
+                    class="uppercase tracking-[0.2em] text-gray-400 font-bold text-[10px] mb-4 block">Categories</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold tracking-tighter text-primary uppercase leading-none">
+                    Curated <br> Essentials</h2>
+            </div>
+            <p class="text-gray-500 font-light max-w-xs text-sm">Carefully selected pieces designed to work together,
+                creating a seamless and sophisticated look.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Men -->
+            <div class="group relative aspect-[4/5] overflow-hidden rounded-3xl cursor-pointer">
+                <img src="https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?q=80&w=2066&auto=format&fit=crop"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500"></div>
+                <div class="absolute bottom-8 left-8 text-white">
+                    <h3 class="text-2xl font-bold uppercase tracking-widest mb-2">Menswear</h3>
+                    <p
+                        class="text-xs uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-opacity duration-500 underline underline-offset-8">
+                        Explore Collection</p>
+                </div>
+            </div>
+            <!-- Women -->
+            <div class="group relative aspect-[4/5] overflow-hidden rounded-3xl cursor-pointer">
+                <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500"></div>
+                <div class="absolute bottom-8 left-8 text-white">
+                    <h3 class="text-2xl font-bold uppercase tracking-widest mb-2">Womenswear</h3>
+                    <p
+                        class="text-xs uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-opacity duration-500 underline underline-offset-8">
+                        Explore Collection</p>
+                </div>
+            </div>
+            <!-- Accessories -->
+            <div class="group relative aspect-[4/5] overflow-hidden rounded-3xl cursor-pointer">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999&auto=format&fit=crop"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500"></div>
+                <div class="absolute bottom-8 left-8 text-white">
+                    <h3 class="text-2xl font-bold uppercase tracking-widest mb-2">Essentials</h3>
+                    <p
+                        class="text-xs uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-opacity duration-500 underline underline-offset-8">
+                        Explore Collection</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= FEATURED SHOWCASE ================= -->
+<section class="py-32 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-20">
+            <span class="uppercase tracking-[0.2em] text-accent font-bold text-[10px] mb-4 block">Shop the Look</span>
+            <h2 class="text-5xl font-black text-primary tracking-tighter uppercase mb-6">Featured Arrivals</h2>
+            <div class="w-20 h-1 bg-secondary mx-auto"></div>
+        </div>
+
+        <div class="grid md:grid-cols-4 gap-8">
+            <!-- Product 1 (Static but beautifully styled) -->
+            <div class="group cursor-pointer">
+                <div class="relative aspect-[3/4] rounded-2xl overflow-hidden bg-white mb-6 border border-gray-100">
+                    <img src="https://images.pexels.com/photos/6311659/pexels-photo-6311659.jpeg"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div
+                        class="absolute top-4 left-4 bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
+                        New</div>
+                </div>
+                <div>
+                    <h3 class="font-bold text-primary uppercase text-sm tracking-tight mb-1">Premium Utility Jacket</h3>
+                    <p class="text-gray-400 text-xs font-bold tracking-widest uppercase">₹1,499.00</p>
+                </div>
+            </div>
+
+            <div class="group cursor-pointer">
+                <div class="relative aspect-[3/4] rounded-2xl overflow-hidden bg-white mb-6 border border-gray-100">
+                    <img src="https://images.pexels.com/photos/6311660/pexels-photo-6311660.jpeg"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                </div>
+                <div>
+                    <h3 class="font-bold text-primary uppercase text-sm tracking-tight mb-1">Vintage Denim Ensemble</h3>
+                    <p class="text-gray-400 text-xs font-bold tracking-widest uppercase">₹999.00</p>
+                </div>
+            </div>
+
+            <div class="group cursor-pointer">
+                <div class="relative aspect-[3/4] rounded-2xl overflow-hidden bg-white mb-6 border border-gray-100">
+                    <img src="https://images.pexels.com/photos/6311657/pexels-photo-6311657.jpeg"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div
+                        class="absolute top-4 left-4 bg-secondary text-primary text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
+                        Sale</div>
+                </div>
+                <div>
+                    <h3 class="font-bold text-primary uppercase text-sm tracking-tight mb-1">Essential Urban Hoodie</h3>
+                    <p class="text-gray-400 text-xs font-bold tracking-widest uppercase"><span
+                            class="line-through mr-2">₹1,799</span> ₹1,299.00</p>
+                </div>
+            </div>
+
+            <div class="group cursor-pointer">
+                <div class="relative aspect-[3/4] rounded-2xl overflow-hidden bg-white mb-6 border border-gray-100">
+                    <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?q=80&w=1974&auto=format&fit=crop"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                </div>
+                <div>
+                    <h3 class="font-bold text-primary uppercase text-sm tracking-tight mb-1">Minimalist Tailored Set
+                    </h3>
+                    <p class="text-gray-400 text-xs font-bold tracking-widest uppercase">₹2,499.00</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-20 text-center">
+            <a href="{% url 'products' %}"
+                class="text-sm font-bold uppercase tracking-widest border-b-2 border-primary pb-2 hover:text-accent hover:border-accent transition-all duration-300">View
+                All Products</a>
+        </div>
+    </div>
+</section>
+
+<!-- ================= CTA BANNER ================= -->
+<section class="relative py-40 overflow-hidden bg-primary">
+    <div class="absolute inset-0">
+        <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=2070&auto=format&fit=crop"
+            class="w-full h-full object-cover opacity-30 grayscale">
+    </div>
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+        <span class="uppercase tracking-[0.4em] text-secondary font-bold text-[10px] mb-8 block">Member Exclusive</span>
+        <h2 class="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter mb-10">Get 20% Off Your First
+            Order</h2>
+        <p class="text-gray-400 text-lg font-light mb-12 max-w-2xl mx-auto">Join the ClothAura community and stay ahead
+            of the curve. Receive exclusive access to sales and new arrivals.</p>
+        <a href="{% url 'register' %}"
+            class="bg-white text-primary px-12 py-5 rounded-full font-bold uppercase tracking-widest text-sm hover:bg-secondary transition-all transform hover:scale-105">Join
+            the Club</a>
+    </div>
+</section>
+
+<!-- ================= FEATURES ================= -->
+<section class="py-24 bg-white border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid md:grid-cols-4 gap-12">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="bi bi-truck text-2xl text-primary"></i>
+                </div>
+                <h4 class="font-bold uppercase tracking-widest text-xs mb-3">Fast Shipping</h4>
+                <p class="text-gray-400 text-xs">Standard delivery within 3-5 days across India.</p>
+            </div>
+            <div class="text-center">
+                <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="bi bi-shield-check text-2xl text-primary"></i>
+                </div>
+                <h4 class="font-bold uppercase tracking-widest text-xs mb-3">Secure Payments</h4>
+                <p class="text-gray-400 text-xs">Industry-leading encryption for all transactions.</p>
+            </div>
+            <div class="text-center">
+                <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="bi bi-arrow-return-left text-2xl text-primary"></i>
+                </div>
+                <h4 class="font-bold uppercase tracking-widest text-xs mb-3">15-Day Returns</h4>
+                <p class="text-gray-400 text-xs">Hassle-free return policy for ultimate peace of mind.</p>
+            </div>
+            <div class="text-center">
+                <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="bi bi-patch-check text-2xl text-primary"></i>
+                </div>
+                <h4 class="font-bold uppercase tracking-widest text-xs mb-3">Premium Quality</h4>
+                <p class="text-gray-400 text-xs">Each piece is crafted with meticulous attention to detail.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

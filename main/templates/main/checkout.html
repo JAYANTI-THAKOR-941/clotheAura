@@ -1,0 +1,150 @@
+{% extends "main/base.html" %}
+{% block title %}Checkout - ClothAura{% endblock %}
+
+{% block content %}
+<div class="bg-slate-50 min-h-screen py-20">
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+            <div>
+                <span class="uppercase tracking-[0.2em] text-gray-400 font-bold text-[10px] mb-4 block">Secure
+                    Payment</span>
+                <h2 class="text-4xl font-black text-primary tracking-tighter uppercase leading-none">Checkout</h2>
+            </div>
+            <div class="flex items-center gap-2 text-gray-400 text-[10px] font-bold uppercase tracking-widest">
+                <i class="bi bi-shield-lock text-accent text-lg"></i> SSL Encrypted
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-16">
+
+            <!-- Information -->
+            <div class="space-y-12">
+                <div>
+                    <h3
+                        class="text-xl font-bold uppercase tracking-widest mb-8 text-primary border-b border-gray-100 pb-4">
+                        Personal Details</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-2">
+                            <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-400">Full
+                                Name</label>
+                            <input type="text" value="{{ user_name }}" readonly
+                                class="w-full px-6 py-4 bg-white border border-gray-100 rounded-2xl focus:outline-none text-sm font-medium text-gray-400">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-400">Email
+                                Address</label>
+                            <input type="email" value="{{ user_email }}" readonly
+                                class="w-full px-6 py-4 bg-white border border-gray-100 rounded-2xl focus:outline-none text-sm font-medium text-gray-400">
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3
+                        class="text-xl font-bold uppercase tracking-widest mb-8 text-primary border-b border-gray-100 pb-4">
+                        Shipping Address</h3>
+                    <div class="space-y-2">
+                        <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-400">Delivery
+                            Address</label>
+                        <textarea id="addressInput" placeholder="Enter your full street address"
+                            class="w-full px-6 py-4 bg-white border border-gray-100 rounded-3xl focus:ring-1 focus:ring-accent focus:outline-none text-sm min-h-[120px] transition-all"></textarea>
+                    </div>
+                </div>
+
+                <div class="p-8 bg-white rounded-[2rem] border border-gray-100 shadow-sm">
+                    <h3 class="text-xs font-bold uppercase tracking-widest mb-4 flex items-center gap-2">
+                        <i class="bi bi-info-circle text-accent"></i> Note
+                    </h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed">
+                        Currently, we only support online payments via Razorpay for a seamless and secure experience.
+                        Cash on delivery is not available for premium collections.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div>
+                <div class="bg-primary text-white rounded-[2.5rem] p-10 shadow-2xl sticky top-32">
+                    <h3 class="text-xl font-bold uppercase tracking-widest mb-10 border-b border-white/10 pb-6">Order
+                        Summary</h3>
+
+                    <div class="max-h-[300px] overflow-y-auto space-y-6 mb-10 pr-4 custom-scrollbar">
+                        {% for id, item in cart.items %}
+                        <div class="flex justify-between items-center gap-4">
+                            <div class="flex-grow">
+                                <h4 class="text-sm font-bold uppercase tracking-tight line-clamp-1">{{ item.name }}</h4>
+                                <p class="text-[10px] text-white/40 uppercase tracking-widest mt-1">Qty: {{ item.qty }}
+                                    × ₹{{ item.price|floatformat:2 }}</p>
+                            </div>
+                            <span class="text-sm font-bold">₹{{ item.total_price|floatformat:2 }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="space-y-4 mb-10 pt-10 border-t border-white/10">
+                        <div class="flex justify-between text-xs uppercase tracking-[0.2em] text-white/40 font-bold">
+                            <span>Subtotal</span>
+                            <span class="text-white">₹{{ total|floatformat:2 }}</span>
+                        </div>
+                        <div class="flex justify-between text-xs uppercase tracking-[0.2em] text-white/40 font-bold">
+                            <span>Shipping</span>
+                            <span class="text-secondary">FREE</span>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-end mb-12">
+                        <span class="uppercase tracking-widest text-[10px] font-bold text-white/40">Grand Total</span>
+                        <span class="text-4xl font-black text-white">₹{{ total|floatformat:2 }}</span>
+                    </div>
+
+                    <button id="rzp-button1"
+                        class="w-full bg-secondary text-primary py-6 rounded-full font-bold uppercase tracking-[0.2em] text-xs hover:bg-yellow-300 transition-all transform hover:scale-[1.02] active:scale-95 shadow-2xl flex items-center justify-center gap-3">
+                        <i class="bi bi-wallet2"></i> Pay & Place Order
+                    </button>
+
+                    <div class="mt-8 flex justify-center gap-4 border-t border-white/10 pt-8 opacity-30">
+                        <i class="bi bi-stripe text-xl"></i>
+                        <i class="bi bi-credit-card text-xl"></i>
+                        <i class="bi bi-paypal text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Razorpay Checkout JS -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    var options = {
+        "key": "{{ razorpay_merchant_key }}",
+        "amount": "{{ total|floatformat:2|stringformat:'f'|floatformat:0|add:'0' }}",
+        "currency": "INR",
+        "name": "ClothAura",
+        "description": "Purchase from ClothAura",
+        "order_id": "{{ razorpay_order_id }}",
+        "handler": function (response) {
+            const address = document.getElementById('addressInput').value;
+            window.location.href = "{% url 'payment_success' %}?payment_id=" + response.razorpay_payment_id +
+                "&order_id=" + response.razorpay_order_id +
+                "&signature=" + response.razorpay_signature +
+                "&address=" + encodeURIComponent(address);
+        },
+        "prefill": {
+            "name": "{{ user_name }}",
+            "email": "{{ user_email }}"
+        },
+        "theme": {
+            "color": "#FACC15"
+        }
+    };
+
+    var rzp1 = new Razorpay(options);
+    document.getElementById('rzp-button1').onclick = function (e) {
+        rzp1.open();
+        e.preventDefault();
+    }
+</script>
+{% endblock %}

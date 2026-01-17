@@ -1,0 +1,168 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Contact Us - ClothAura{% endblock %}
+
+{% block content %}
+
+<!-- ================= HERO SECTION ================= -->
+<section class="relative text-white h-[65vh] w-full overflow-hidden">
+    <img src="https://images.pexels.com/photos/2983464/pexels-photo-2983464.jpeg?auto=compress"
+         class="absolute inset-0 w-full h-full object-cover">
+    <div class="absolute inset-0 bg-[rgba(0,0,0,0.55)]"></div>
+    
+    <div class="relative z-10 flex items-center justify-center h-full text-center px-6">
+        <div>
+            <h1 class="text-5xl md:text-6xl font-bold">Contact <span class="text-yellow-400">ClothAura</span></h1>
+            <p class="text-lg opacity-90 mt-4 max-w-xl mx-auto">
+                We’re here to help you with orders, products, or anything else. Reach us anytime!
+            </p>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================= OUR CONTACT DETAILS ================= -->
+<section class="py-16 max-w-6xl mx-auto px-6">
+    <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Get in Touch</h2>
+
+    <div class="grid md:grid-cols-3 gap-8 text-center">
+
+        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg duration-300">
+            <i class="bi bi-geo-alt-fill text-4xl text-yellow-400"></i>
+            <h4 class="mt-3 font-semibold text-lg">Head Office</h4>
+            <p class="text-gray-600 mt-2">ClothAura Pvt. Ltd.<br>Gandhinagar, Gujarat, India</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg duration-300">
+            <i class="bi bi-envelope-paper text-4xl text-yellow-400"></i>
+            <h4 class="mt-3 font-semibold text-lg">Email Support</h4>
+            <p class="text-gray-600 mt-2">support@clothaura.com<br>help@clothaura.com</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg duration-300">
+            <i class="bi bi-telephone-outbound text-4xl text-yellow-400"></i>
+            <h4 class="mt-3 font-semibold text-lg">Phone</h4>
+            <p class="text-gray-600 mt-2">+91 98765 43210<br>+91 91234 56789</p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= CUSTOMER SUPPORT SECTION ================= -->
+<section class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">Customer Support</h2>
+        <p class="text-gray-600 max-w-3xl mx-auto text-lg">
+            Need help with your order, size inquiry, payment issue or return request?
+            Our support team is available Monday to Saturday, 10AM – 7PM.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-8 mt-10">
+
+            <div class="bg-white p-8 shadow rounded-xl hover:shadow-lg duration-300">
+                <i class="bi bi-box-seam text-4xl text-yellow-400"></i>
+                <h4 class="font-semibold text-lg mt-3">Order & Tracking</h4>
+                <p class="text-gray-600 text-sm mt-1">Track orders, shipping & delivery updates</p>
+            </div>
+
+            <div class="bg-white p-8 shadow rounded-xl hover:shadow-lg duration-300">
+                <i class="bi bi-arrow-counterclockwise text-4xl text-yellow-400"></i>
+                <h4 class="font-semibold text-lg mt-3">Returns & Refunds</h4>
+                <p class="text-gray-600 text-sm mt-1">Easy return policy with quick refunds</p>
+            </div>
+
+            <div class="bg-white p-8 shadow rounded-xl hover:shadow-lg duration-300">
+                <i class="bi bi-credit-card text-4xl text-yellow-400"></i>
+                <h4 class="font-semibold text-lg mt-3">Payments & Wallet</h4>
+                <p class="text-gray-600 text-sm mt-1">100% secure payments with encryption</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ================= FAQ SECTION ================= -->
+<section class="py-16 max-w-6xl mx-auto px-6">
+    <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Frequently Asked Questions</h2>
+
+    <div class="space-y-6 max-w-3xl mx-auto">
+
+        <div class="bg-white border p-5 rounded-xl shadow hover:shadow-md duration-300">
+            <h4 class="font-semibold text-lg">How long does delivery take?</h4>
+            <p class="text-gray-600 mt-2">Usually 3-7 business days depending on location.</p>
+        </div>
+
+        <div class="bg-white border p-5 rounded-xl shadow hover:shadow-md duration-300">
+            <h4 class="font-semibold text-lg">Do you offer returns?</h4>
+            <p class="text-gray-600 mt-2">Yes, hassle-free returns within 7 days of delivery.</p>
+        </div>
+
+        <div class="bg-white border p-5 rounded-xl shadow hover:shadow-md duration-300">
+            <h4 class="font-semibold text-lg">Are payment methods secure?</h4>
+            <p class="text-gray-600 mt-2">Yes, all transactions are encrypted & safe.</p>
+        </div>
+
+        <div class="bg-white border p-5 rounded-xl shadow hover:shadow-md duration-300">
+            <h4 class="font-semibold text-lg">How can I contact support?</h4>
+            <p class="text-gray-600 mt-2">Email / Phone / Instagram DMs — anytime!</p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= STORES & LOCATIONS ================= -->
+<section class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold text-gray-800 mb-10">Our Stores & Locations</h2>
+
+        <div class="grid md:grid-cols-3 gap-8">
+
+            <div class="bg-white p-6 rounded-xl shadow">
+                <h4 class="font-semibold text-lg mb-1">Gandhinagar</h4>
+                <p class="text-gray-600">Sector-21, Gujarat</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow">
+                <h4 class="font-semibold text-lg mb-1">Ahmedabad</h4>
+                <p class="text-gray-600">CG Road, Navrangpura</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow">
+                <h4 class="font-semibold text-lg mb-1">Vadodara</h4>
+                <p class="text-gray-600">Alkapuri Main Market</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ================= SOCIAL MEDIA ================= -->
+<section class="py-16 text-center">
+    <h2 class="text-3xl font-bold text-gray-800 mb-3">Connect With Us</h2>
+    <p class="text-gray-600 mb-6">Follow us for updates, sales & style inspirations</p>
+
+    <div class="flex justify-center gap-6 text-3xl">
+        <a class="hover:text-yellow-400 duration-300"><i class="bi bi-instagram"></i></a>
+        <a class="hover:text-yellow-400 duration-300"><i class="bi bi-facebook"></i></a>
+        <a class="hover:text-yellow-400 duration-300"><i class="bi bi-twitter"></i></a>
+        <a class="hover:text-yellow-400 duration-300"><i class="bi bi-youtube"></i></a>
+    </div>
+</section>
+
+
+<!-- ================= CTA ================= -->
+<section class="w-full py-20 bg-gray-900 text-white text-center">
+    <h2 class="text-4xl font-bold mb-4">Need Assistance?</h2>
+    <p class="text-lg opacity-90 mb-6">Our support team is one click away</p>
+    <a href="mailto:support@clothaura.com" 
+       class="bg-yellow-400 text-gray-900 px-12 py-3 text-lg font-semibold rounded-md hover:bg-yellow-300 duration-300">
+        Email Support
+    </a>
+</section>
+
+{% endblock %}

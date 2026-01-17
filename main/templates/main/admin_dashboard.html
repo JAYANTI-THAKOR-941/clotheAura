@@ -1,0 +1,128 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Admin Dashboard - ClothAura{% endblock %}
+
+{% block content %}
+<div class="bg-slate-50 min-h-screen py-20">
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div>
+                <span
+                    class="uppercase tracking-[0.3em] text-accent font-bold text-[10px] mb-4 block">Administration</span>
+                <h1 class="text-5xl font-black text-primary tracking-tighter uppercase leading-none">Management
+                    Dashboard</h1>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="text-right">
+                    <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">System Status</p>
+                    <p class="text-xs font-bold text-green-500 flex items-center gap-2 justify-end">
+                        <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span> Operational
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+            <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100">
+                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-2">Total Revenue</p>
+                <p class="text-3xl font-black text-primary">₹{{ total_revenue|floatformat:2 }}</p>
+                <div
+                    class="mt-4 flex items-center gap-2 text-green-500 font-bold text-[10px] uppercase tracking-widest">
+                    <i class="bi bi-graph-up-arrow"></i> +12% this month
+                </div>
+            </div>
+            <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100">
+                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-2">Total Orders</p>
+                <p class="text-3xl font-black text-primary">{{ orders.count }}</p>
+                <div class="mt-4 flex items-center gap-2 text-accent font-bold text-[10px] uppercase tracking-widest">
+                    <i class="bi bi-cart-check"></i> Across all regions
+                </div>
+            </div>
+            <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100">
+                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-2">Active Users</p>
+                <p class="text-3xl font-black text-primary">{{ total_users }}</p>
+                <div
+                    class="mt-4 flex items-center gap-2 text-indigo-500 font-bold text-[10px] uppercase tracking-widest">
+                    <i class="bi bi-people"></i> Registered accounts
+                </div>
+            </div>
+            <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100">
+                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-2">Catalog Items</p>
+                <p class="text-3xl font-black text-primary">{{ total_products }}</p>
+                <div class="mt-4 flex items-center gap-2 text-pink-500 font-bold text-[10px] uppercase tracking-widest">
+                    <i class="bi bi-tags"></i> Modern collections
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Orders -->
+        <div class="bg-white rounded-[2.5rem] p-10 shadow-sm border border-gray-100">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
+                <h3 class="text-xl font-bold uppercase tracking-widest text-primary">Recent Transactions</h3>
+                <div class="flex items-center gap-4">
+                    <button
+                        class="bg-slate-50 text-gray-400 px-6 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-gray-100 transition-colors">Export
+                        CSV</button>
+                    <button
+                        class="bg-primary text-white px-6 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors">View
+                        All</button>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="border-b border-gray-50">
+                            <th class="pb-6 text-[10px] font-bold uppercase tracking-widest text-gray-400">Order ID</th>
+                            <th class="pb-6 text-[10px] font-bold uppercase tracking-widest text-gray-400">Customer</th>
+                            <th class="pb-6 text-[10px] font-bold uppercase tracking-widest text-gray-400">Amount</th>
+                            <th class="pb-6 text-[10px] font-bold uppercase tracking-widest text-gray-400">Date</th>
+                            <th class="pb-6 text-[10px] font-bold uppercase tracking-widest text-gray-400 text-right">
+                                Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-50">
+                        {% for order in orders %}
+                        <tr>
+                            <td class="py-6">
+                                <span class="text-sm font-bold text-primary italic">#CA-{{ order.id }}</span>
+                            </td>
+                            <td class="py-6">
+                                <div class="flex items-center gap-4">
+                                    <div
+                                        class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center text-[10px] font-bold text-primary">
+                                        {{ order.user.name|slice:":1"|upper }}
+                                    </div>
+                                    <span class="text-sm font-medium text-gray-600">{{ order.user.name }}</span>
+                                </div>
+                            </td>
+                            <td class="py-6">
+                                <span class="text-sm font-bold text-primary">₹{{ order.total_amount|floatformat:2
+                                    }}</span>
+                            </td>
+                            <td class="py-6 text-sm text-gray-400 font-light">
+                                {{ order.created_at|date:"d M, Y" }}
+                            </td>
+                            <td class="py-6 text-right">
+                                <button
+                                    class="text-[10px] font-bold uppercase tracking-widest text-accent hover:text-primary transition-colors">Details</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            {% if not orders %}
+            <div class="text-center py-20 text-gray-300">
+                <i class="bi bi-inbox text-4xl mb-4 block"></i>
+                <p class="uppercase tracking-widest text-[10px] font-bold">No transactions found</p>
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends "main/base.html" %}
+{% block title %}Shopping Bag - ClothAura{% endblock %}
+
+{% block content %}
+<div class="bg-slate-50 min-h-screen py-20">
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+            <div>
+                <span class="uppercase tracking-[0.2em] text-gray-400 font-bold text-[10px] mb-4 block">Cart</span>
+                <h2 class="text-4xl font-black text-primary tracking-tighter uppercase leading-none">Your Shopping Bag
+                </h2>
+            </div>
+            {% if cart %}
+            <p class="text-gray-400 text-sm font-light uppercase tracking-widest">{{ cart|length }} Items Selected</p>
+            {% endif %}
+        </div>
+
+        {% if cart %}
+        <div class="grid lg:grid-cols-3 gap-12">
+
+            <!-- Cart Items -->
+            <div class="lg:col-span-2 space-y-6">
+                {% for id, item in cart.items %}
+                <div
+                    class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 flex flex-col sm:flex-row gap-6 items-center transition-all hover:shadow-md">
+                    <div class="w-32 h-32 rounded-2xl overflow-hidden bg-slate-50 flex-shrink-0">
+                        <img src="{{ item.image }}" alt="{{ item.name }}" class="w-full h-full object-cover">
+                    </div>
+
+                    <div class="flex-grow text-center sm:text-left">
+                        <h3 class="font-bold text-primary uppercase text-sm tracking-tight mb-1">{{ item.name }}</h3>
+                        <p class="text-gray-400 text-xs font-bold tracking-widest uppercase mb-4">₹{{
+                            item.price|floatformat:2 }}</p>
+
+                        <div class="flex items-center justify-center sm:justify-start gap-4">
+                            <div
+                                class="flex items-center border border-gray-100 rounded-full overflow-hidden bg-slate-50">
+                                <a href="{% url 'decrease_qty' id %}"
+                                    class="px-4 py-2 hover:bg-gray-200 transition-colors">
+                                    <i class="bi bi-dash"></i>
+                                </a>
+                                <span class="w-10 text-center font-bold text-sm">{{ item.qty }}</span>
+                                <a href="{% url 'increase_qty' id %}"
+                                    class="px-4 py-2 hover:bg-gray-200 transition-colors">
+                                    <i class="bi bi-plus"></i>
+                                </a>
+                            </div>
+                            <a href="{% url 'remove_from_cart' id %}"
+                                class="text-gray-300 hover:text-red-500 transition-colors text-sm uppercase font-bold tracking-widest">
+                                Remove
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="text-center sm:text-right flex-shrink-0 min-w-[120px]">
+                        <p class="text-primary font-black text-lg">₹{{ item.total_price|floatformat:2 }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Bag Summary -->
+            <div class="lg:col-span-1">
+                <div class="bg-primary text-white rounded-[2rem] p-10 sticky top-32 shadow-2xl">
+                    <h3 class="text-xl font-bold uppercase tracking-widest mb-8 border-b border-white/10 pb-6">Summary
+                    </h3>
+
+                    <div class="space-y-4 mb-10">
+                        <div class="flex justify-between text-sm uppercase tracking-widest text-white/50">
+                            <span>Subtotal</span>
+                            <span class="text-white">₹{{ total|floatformat:2 }}</span>
+                        </div>
+                        <div class="flex justify-between text-sm uppercase tracking-widest text-white/50">
+                            <span>Shipping</span>
+                            <span class="text-white font-bold text-xs">FREE</span>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-end mb-10 pt-6 border-t border-white/10">
+                        <span class="uppercase tracking-widest text-xs font-bold text-secondary">Total</span>
+                        <span class="text-3xl font-black">₹{{ total|floatformat:2 }}</span>
+                    </div>
+
+                    <a href="{% url 'checkout' %}"
+                        class="block w-full bg-secondary text-primary py-5 rounded-full font-bold uppercase tracking-widest text-center text-xs hover:bg-yellow-300 transition-all transform hover:scale-[1.02] shadow-xl">
+                        Checkout Now
+                    </a>
+
+                    <p class="text-[10px] text-center mt-6 text-white/30 uppercase tracking-[0.2em]">Secure checkout
+                        with Razorpay</p>
+                </div>
+            </div>
+
+        </div>
+
+        {% else %}
+        <div class="text-center py-32 bg-white rounded-[3rem] shadow-sm border border-gray-50">
+            <div class="w-24 h-24 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-8">
+                <i class="bi bi-bag-x text-4xl text-gray-200"></i>
+            </div>
+            <h3 class="text-2xl font-black text-primary uppercase mb-4 tracking-tighter">Your bag is empty</h3>
+            <p class="text-gray-400 font-light mb-12 max-w-sm mx-auto">Looks like you haven't added anything to your bag
+                yet. Let's find something perfect for you.</p>
+            <a href="{% url 'products' %}"
+                class="inline-block bg-primary text-white px-12 py-5 rounded-full font-bold uppercase tracking-widest text-xs btn-premium">Start
+                Shopping</a>
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}

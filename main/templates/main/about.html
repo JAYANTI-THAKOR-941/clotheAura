@@ -1,0 +1,163 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Our Story - ClothAura{% endblock %}
+
+{% block content %}
+
+<!-- ================= PREMIUM HERO SECTION ================= -->
+<section class="relative h-[60vh] bg-primary overflow-hidden flex items-center justify-center">
+    <div class="absolute inset-0">
+        <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=1974&auto=format&fit=crop"
+            class="w-full h-full object-cover opacity-40 grayscale">
+        <div class="absolute inset-0 bg-gradient-to-b from-primary/80 via-transparent to-primary/80"></div>
+    </div>
+
+    <div class="relative z-10 text-center px-6">
+        <span class="uppercase tracking-[0.4em] text-secondary font-bold text-[10px] mb-4 block">The ClothAura
+            Identity</span>
+        <h1 class="text-5xl md:text-7xl font-black text-white tracking-tighter uppercase leading-none">Our Story</h1>
+    </div>
+</section>
+
+<!-- ================= VISIONARY SECTION ================= -->
+<section class="py-32 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-20 items-center">
+            <div class="space-y-8">
+                <div class="w-12 h-1 bg-secondary"></div>
+                <h2 class="text-4xl md:text-5xl font-black text-primary tracking-tighter uppercase leading-none">
+                    Crafting <br> Confidence</h2>
+                <p class="text-gray-500 font-light leading-relaxed text-lg italic">
+                    "We didn't just want to sell clothes. We wanted to curate a feeling — an aura of effortless elegance
+                    and modern strength."
+                </p>
+                <p class="text-gray-400 font-light leading-relaxed">
+                    ClothAura was founded on the belief that fashion should be a seamless extension of one's identity.
+                    We combine architectural silhouettes with the softest premium fabrics to create pieces that
+                    transition effortlessly from high-stakes meetings to relaxed evenings.
+                </p>
+                <div class="grid grid-cols-2 gap-8 pt-8">
+                    <div>
+                        <p class="text-3xl font-black text-primary mb-1">100%</p>
+                        <p class="text-[10px] uppercase tracking-widest text-gray-400 font-bold">Premium Cotton</p>
+                    </div>
+                    <div>
+                        <p class="text-3xl font-black text-primary mb-1">50k+</p>
+                        <p class="text-[10px] uppercase tracking-widest text-gray-400 font-bold">Happy Customers</p>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=2070&auto=format&fit=crop"
+                        class="w-full h-full object-cover">
+                </div>
+                <div class="absolute -bottom-10 -left-10 w-48 h-48 bg-secondary rounded-full -z-10 animate-pulse"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= VALUES ================= -->
+<section class="py-32 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-24">
+            <span class="uppercase tracking-[0.2em] text-accent font-bold text-[10px] mb-4 block">Our Values</span>
+            <h2 class="text-5xl font-black text-primary tracking-tighter uppercase">Why ClothAura?</h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-12">
+            <div
+                class="bg-white p-12 rounded-[2.5rem] shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-500 group">
+                <div
+                    class="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-colors duration-500">
+                    <i class="bi bi-gem text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold uppercase tracking-tight mb-4">Ethical Sourcing</h3>
+                <p class="text-gray-400 text-sm font-light leading-relaxed">We partner only with sustainable mills and
+                    ensure fair practices at every stage of production.</p>
+            </div>
+
+            <div
+                class="bg-white p-12 rounded-[2.5rem] shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-500 group">
+                <div
+                    class="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-colors duration-500">
+                    <i class="bi bi-brush text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold uppercase tracking-tight mb-4">Modern Design</h3>
+                <p class="text-gray-400 text-sm font-light leading-relaxed">Our designers focus on timeless silhouettes
+                    that outlast seasonal trends.</p>
+            </div>
+
+            <div
+                class="bg-white p-12 rounded-[2.5rem] shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-500 group">
+                <div
+                    class="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-colors duration-500">
+                    <i class="bi bi-heart text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold uppercase tracking-tight mb-4">Client Focus</h3>
+                <p class="text-gray-400 text-sm font-light leading-relaxed">Your satisfaction is our primary metric. We
+                    offer concierge-level support for every order.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= TEAM ================= -->
+<section class="py-32 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+            <div>
+                <span class="uppercase tracking-[0.2em] text-gray-400 font-bold text-[10px] mb-4 block">The
+                    Collective</span>
+                <h2 class="text-5xl font-black text-primary tracking-tighter uppercase">Creative Minds</h2>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-12">
+            <div class="group">
+                <div
+                    class="aspect-[4/5] rounded-[2rem] overflow-hidden mb-8 grayscale hover:grayscale-0 transition-all duration-700">
+                    <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
+                        class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold uppercase tracking-tight">Riya Sharma</h4>
+                <p class="text-[10px] uppercase tracking-widest text-accent font-bold">Creative Director</p>
+            </div>
+
+            <div class="group">
+                <div
+                    class="aspect-[4/5] rounded-[2rem] overflow-hidden mb-8 grayscale hover:grayscale-0 transition-all duration-700">
+                    <img src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg"
+                        class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold uppercase tracking-tight">Aman Verma</h4>
+                <p class="text-[10px] uppercase tracking-widest text-accent font-bold">Production Lead</p>
+            </div>
+
+            <div class="group">
+                <div
+                    class="aspect-[4/5] rounded-[2rem] overflow-hidden mb-8 grayscale hover:grayscale-0 transition-all duration-700">
+                    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg"
+                        class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold uppercase tracking-tight">Sneha Patel</h4>
+                <p class="text-[10px] uppercase tracking-widest text-accent font-bold">Brand Architect</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<section class="py-40 bg-primary text-center">
+    <div class="max-w-3xl mx-auto px-6">
+        <h2 class="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter mb-10">Define Your <span
+                class="text-secondary italic">Aura</span> Today.</h2>
+        <a href="{% url 'products' %}"
+            class="bg-secondary text-primary px-16 py-6 rounded-full font-bold uppercase tracking-widest text-xs btn-premium">Shop
+            New Arrivals</a>
+    </div>
+</section>
+
+{% endblock %}

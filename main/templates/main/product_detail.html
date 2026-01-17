@@ -1,0 +1,304 @@
+{% extends 'main/base.html' %}
+{% block title %}{{ product.name }} - ClothAura{% endblock %}
+
+{% block extra_css %}
+<style>
+    .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .zoom-container {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .zoom-image {
+        transition: transform 0.5s ease;
+    }
+
+    .zoom-container:hover .zoom-image {
+        transform: scale(1.5);
+    }
+
+    .share-btn:hover {
+        transform: translateY(-3px);
+    }
+
+    .tab-active {
+        color: #1a1a1a;
+        border-bottom: 2px solid #1a1a1a;
+    }
+
+    .wishlist-btn.active i {
+        color: #ef4444;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="bg-gray-50 pt-8 pb-20">
+    <div class="max-w-7xl mx-auto px-6">
+
+        <!-- Breadcrumbs -->
+        <nav class="flex mb-8 text-xs font-medium uppercase tracking-widest text-gray-400">
+            <a href="{% url 'home' %}" class="hover:text-primary transition-colors">Home</a>
+            <span class="mx-2">/</span>
+            <a href="{% url 'products' %}" class="hover:text-primary transition-colors">Shop</a>
+            <span class="mx-2">/</span>
+            <span class="text-primary">{{ product.category|default:"Product" }}</span>
+        </nav>
+
+        <div class="grid lg:grid-cols-2 gap-16">
+
+            <!-- ================= LEFT: IMAGES ================= -->
+            <div class="space-y-6">
+                <!-- Main Image -->
+                <div
+                    class="zoom-container w-full aspect-square bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden group">
+                    <img id="mainImage" src="{{ product.main_image }}" alt="{{ product.name }}"
+                        class="zoom-image w-full h-full object-cover cursor-crosshair">
+
+                    <!-- Wishlist Overlay -->
+                    <button onclick="toggleWishlist(this)"
+                        class="wishlist-btn absolute top-6 right-6 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-xl hover:scale-110 transition-all duration-300">
+                        <i class="bi bi-heart"></i>
+                    </button>
+                </div>
+
+                <!-- Gallery -->
+                {% if product.gallery_images %}
+                <div class="grid grid-cols-4 gap-4">
+                    {% for img in product.gallery_images %}
+                    <div onclick="changeImage('{{ img }}')"
+                        class="aspect-square rounded-2xl border-2 border-transparent hover:border-primary cursor-pointer overflow-hidden transition-all duration-300">
+                        <img src="{{ img }}" class="w-full h-full object-cover">
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- ================= RIGHT: DETAILS ================= -->
+            <div class="flex flex-col">
+
+                <div class="mb-4">
+                    {% if product.in_stock %}
+                    <span
+                        class="text-[10px] bg-green-100 text-green-700 px-3 py-1 rounded-full uppercase font-bold tracking-widest">In
+                        Stock</span>
+                    {% else %}
+                    <span
+                        class="text-[10px] bg-red-100 text-red-700 px-3 py-1 rounded-full uppercase font-bold tracking-widest">Sold
+                        Out</span>
+                    {% endif %}
+                </div>
+
+                <h1 class="text-5xl font-extrabold tracking-tight text-primary mb-2 uppercase">{{ product.name }}</h1>
+                <p class="text-lg text-gray-500 font-light mb-8">{{ product.short_description }}</p>
+
+                <div class="flex items-center gap-6 mb-10">
+                    <span class="text-4xl font-bold text-primary">₹{{ product.final_price }}</span>
+                    {% if product.discount > 0 %}
+                    <span class="text-xl text-gray-300 line-through">₹{{ product.price }}</span>
+                    <span class="text-sm font-bold text-accent">({{ product.discount }}% OFF)</span>
+                    {% endif %}
+                </div>
+
+                <!-- Product Meta -->
+                <div
+                    class="grid grid-cols-2 gap-y-6 pb-10 mb-10 border-b border-gray-100 uppercase tracking-widest text-[10px] font-bold text-gray-400">
+                    <div>
+                        <p class="mb-1 text-gray-300">Brand</p>
+                        <p class="text-primary text-sm">{{ product.brand|default:"ClothAura" }}</p>
+                    </div>
+                    <div>
+                        <p class="mb-1 text-gray-300">Material</p>
+                        <p class="text-primary text-sm">{{ product.material|default:"Premium Cotton" }}</p>
+                    </div>
+                </div>
+
+                <!-- Selection & Cart -->
+                <div class="space-y-8">
+                    {% if product.in_stock %}
+                    <form action="{% url 'add_to_cart' product.id %}" method="get" class="space-y-8">
+                        <div>
+                            <p class="uppercase tracking-widest text-[10px] font-bold text-gray-400 mb-4">Quantity</p>
+                            <div class="flex items-center border border-gray-200 w-fit rounded-full overflow-hidden">
+                                <button type="button" onclick="changeQty(-1)"
+                                    class="px-6 py-3 hover:bg-gray-50 transition-colors border-r border-gray-100">
+                                    <i class="bi bi-dash"></i>
+                                </button>
+                                <input type="number" id="qtyInput" name="qty" value="1" min="1"
+                                    class="w-16 text-center focus:outline-none font-bold">
+                                <button type="button" onclick="changeQty(1)"
+                                    class="px-6 py-3 hover:bg-gray-50 transition-colors border-l border-gray-100">
+                                    <i class="bi bi-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <button type="submit"
+                                class="flex-1 bg-primary text-white py-5 rounded-full font-bold uppercase tracking-widest hover:bg-gray-800 transition-all duration-300 btn-premium flex items-center justify-center gap-3">
+                                <i class="bi bi-bag-plus"></i> Add to Cart
+                            </button>
+                        </div>
+                    </form>
+                    {% else %}
+                    <button
+                        class="w-full bg-gray-200 text-gray-400 py-5 rounded-full font-bold uppercase tracking-widest cursor-not-allowed">
+                        Out of Stock
+                    </button>
+                    {% endif %}
+                </div>
+
+                <!-- Tabs -->
+                <div class="mt-16">
+                    <div class="flex gap-12 border-b border-gray-100 mb-8">
+                        <button onclick="showTab('desc')" id="tab-desc-btn"
+                            class="tab-btn pb-4 uppercase tracking-widest text-[10px] font-bold tab-active">Description</button>
+                        {% if product.features %}
+                        <button onclick="showTab('feat')" id="tab-feat-btn"
+                            class="tab-btn pb-4 uppercase tracking-widest text-[10px] font-bold text-gray-300">Features</button>
+                        {% endif %}
+                        <button onclick="showTab('shipping')" id="tab-shipping-btn"
+                            class="tab-btn pb-4 uppercase tracking-widest text-[10px] font-bold text-gray-300">Shipping</button>
+                    </div>
+
+                    <div id="tab-desc" class="tab-panel text-gray-600 leading-relaxed text-sm">
+                        {{ product.long_description|default:"Elevate your daily look with this premium piece from
+                        ClothAura. Designed for comfort and style, utilizing the finest materials." }}
+                    </div>
+
+                    {% if product.features %}
+                    <div id="tab-feat" class="tab-panel hidden text-gray-600 text-sm">
+                        <ul class="space-y-3">
+                            {% for f in product.features.splitlines %}
+                            <li class="flex items-start gap-3">
+                                <i class="bi bi-check2 text-green-500"></i>
+                                {{ f }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+
+                    <div id="tab-shipping" class="tab-panel hidden text-gray-600 text-sm">
+                        <p class="mb-4">Free standard shipping on all orders over ₹1500. Estimated delivery: 3-5
+                            business days.</p>
+                        <p>Returns accepted within 15 days of purchase.</p>
+                    </div>
+                </div>
+
+                <!-- Social Share -->
+                <div class="mt-16 flex items-center gap-6">
+                    <span class="uppercase tracking-widest text-[10px] font-bold text-gray-400">Share This:</span>
+                    <div class="flex gap-4">
+                        <a href="https://facebook.com" target="_blank"
+                            class="share-btn text-gray-400 hover:text-blue-600 transition-all"><i
+                                class="bi bi-facebook"></i></a>
+                        <a href="https://twitter.com" target="_blank"
+                            class="share-btn text-gray-400 hover:text-sky-500 transition-all"><i
+                                class="bi bi-twitter-x"></i></a>
+                        <a href="https://pinterest.com" target="_blank"
+                            class="share-btn text-gray-400 hover:text-red-500 transition-all"><i
+                                class="bi bi-pinterest"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Related Products Section -->
+        {% if related_products %}
+        <div class="mt-32">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <p class="uppercase tracking-widest text-[10px] font-bold text-gray-400 mb-2">You May Also Like</p>
+                    <h2 class="text-3xl font-extrabold tracking-tight text-primary uppercase">Related Products</h2>
+                </div>
+                <a href="{% url 'products' %}"
+                    class="text-sm font-bold uppercase tracking-widest border-b border-primary pb-1">View All</a>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8">
+                {% for rp in related_products %}
+                <a href="{% url 'product_detail' rp.id %}" class="group block">
+                    <div class="aspect-[3/4] rounded-2xl overflow-hidden bg-white mb-4 shadow-sm border border-gray-50">
+                        <img src="{{ rp.main_image }}"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="space-y-1">
+                        <h3 class="font-bold text-primary uppercase text-sm tracking-tight">{{ rp.name }}</h3>
+                        <p class="text-gray-400 text-xs tracking-widest font-bold">₹{{ rp.final_price }}</p>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+
+<script>
+    function changeImage(src) {
+        document.getElementById('mainImage').src = src;
+    }
+
+    function changeQty(amt) {
+        const input = document.getElementById('qtyInput');
+        let val = parseInt(input.value) + amt;
+        if (val < 1) val = 1;
+        input.value = val;
+    }
+
+    function showTab(tabId) {
+        // Hide all panels
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+        // Show target panel
+        document.getElementById('tab-' + tabId).classList.remove('hidden');
+
+        // Update buttons
+        document.querySelectorAll('.tab-btn').forEach(b => {
+            b.classList.remove('tab-active');
+            b.classList.add('text-gray-300');
+        });
+        document.getElementById('tab-' + tabId + '-btn').classList.add('tab-active');
+        document.getElementById('tab-' + tabId + '-btn').classList.remove('text-gray-300');
+    }
+
+    function toggleWishlist(btn) {
+        btn.classList.toggle('active');
+        const icon = btn.querySelector('i');
+        if (btn.classList.contains('active')) {
+            icon.classList.remove('bi-heart');
+            icon.classList.add('bi-heart-fill');
+            // Add animation class if needed
+        } else {
+            icon.classList.remove('bi-heart-fill');
+            icon.classList.add('bi-heart');
+        }
+    }
+
+    // Follow mouse for zoom (Improved)
+    const container = document.querySelector('.zoom-container');
+    const image = document.querySelector('.zoom-image');
+
+    container.addEventListener('mousemove', (e) => {
+        const x = e.clientX - container.offsetLeft;
+        const y = e.clientY - container.offsetTop;
+
+        const xPercent = (x / container.offsetWidth) * 100;
+        const yPercent = (y / container.offsetHeight) * 100;
+
+        image.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+    });
+
+    container.addEventListener('mouseleave', () => {
+        image.style.transformOrigin = 'center center';
+    });
+</script>
+{% endblock %}

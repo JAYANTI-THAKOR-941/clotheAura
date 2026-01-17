@@ -1,0 +1,18 @@
+{% extends "main/base.html" %}
+{% block title %}Payment Successful - ClothAura{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto px-5 py-20 text-center">
+    <h2 class="text-4xl font-bold text-green-600 mb-6">🎉 Payment Successful!</h2>
+    <p class="text-lg text-gray-700 mb-4">Thank you for your purchase. Your order has been placed successfully.</p>
+
+    <div class="bg-gray-100 rounded-lg p-6 mb-6 inline-block text-left">
+        <p class="font-semibold">Payment ID: <span class="text-gray-900">{{ payment_id }}</span></p>
+        <p class="font-semibold">Order ID: <span class="text-gray-900">{{ order_id }}</span></p>
+    </div>
+
+    <a href="{% url 'home' %}" class="bg-yellow-400 text-gray-900 px-6 py-3 rounded-xl font-semibold text-lg hover:bg-yellow-300 transition">
+        Back to Home
+    </a>
+</div>
+{% endblock %}
