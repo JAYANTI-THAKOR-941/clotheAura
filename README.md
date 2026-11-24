@@ -26,3 +26,12 @@ New original supplemental content for practical training and self-study. Existin
 - [architecture-guide.md](docs/architecture-guide.md)
 - [manual-test-plan.md](docs/manual-test-plan.md)
 - [learning-projects.md](docs/learning-projects.md)
+
+## Expanded learning and developer resources
+
+New supplementary content (original material preserved):
+
+- [ARCHITECTURE.md](docs/ARCHITECTURE.md)
+- [QA_CHECKLIST.md](docs/QA_CHECKLIST.md)
+- [SECURITY_REVIEW.md](docs/SECURITY_REVIEW.md)
+- [tests_portfolio.py](main/tests_portfolio.py)
